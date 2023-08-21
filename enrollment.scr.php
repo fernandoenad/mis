@@ -46,8 +46,8 @@ if(isset($_GET['UpdateEnroll']) && $_GET['UpdateEnroll']=="Yes"){
 
 if(isset($_GET['Enroll']) && $_GET['Enroll']=="Yes"){
 	$schoolDetails = array($current_school_code,$current_school_full,$current_school_address);
-	$schoolDetails_string = mysql_escape_string(serialize($schoolDetails));
-	$result1 = dbquery("INSERT INTO studenroll (enrol_no, enrol_stud_no, enrol_sy, enrol_school, enrol_level, enrol_section, enrol_height, enrol_weight, enrol_status1, enrol_status2, enrol_remarks, enrol_average, enrol_admitdate, enrol_username, enrol_updatedate, enrol_track, enrol_strand, enrol_combo, enrol_schoolyears, enrol_ti) VALUES ('','".$_POST['enrol_stud_no']."','".$current_sy."','".$schoolDetails_string."','".$_POST['enrol_level']."','".$_POST['enrol_section']."','".$_POST['enrol_height']."','".$_POST['enrol_weight']."','".$_POST['enrol_status1']."','".$_POST['enrol_status2']."','".$_POST['enrol_remarks']."','".$_POST['enrol_average']."',NOW(),'".$_SESSION["userid"]."',NOW(),'".$_POST['enrol_track']."', '".$_POST['enrol_strand']."', '".$_POST['enrol_combo']."', '".$_POST['enrol_schoolyears']."', '".$_POST['ti_status']."')");	
+	$schoolDetails_string = serialize($schoolDetails);
+	$result1 = dbquery("INSERT INTO studenroll (enrol_no, enrol_stud_no, enrol_sy, enrol_school, enrol_level, enrol_section, enrol_height, enrol_weight, enrol_status1, enrol_status2, enrol_remarks, enrol_average, enrol_eligibility, enrol_graddate, enrol_admitdate, enrol_admitdate2, enrol_username, enrol_updatedate, enrol_track, enrol_strand, enrol_combo, enrol_schoolyears, enrol_ti, enrol_gradawards) VALUES (0,'".$_POST['enrol_stud_no']."','".$current_sy."','".$schoolDetails_string."','".$_POST['enrol_level']."','".$_POST['enrol_section']."','".$_POST['enrol_height']."','".$_POST['enrol_weight']."','".$_POST['enrol_status1']."','".$_POST['enrol_status2']."','".$_POST['enrol_remarks']."','".(isset($_POST['enrol_average']) ? $_POST['enrol_average'] : 0)."', '', '0000-00-00', NOW(), '0000-00-00','".$_SESSION["userid"]."',NOW(),'".(isset($_POST['enrol_track']) ? $_POST['enrol_track'] : "")."', '".(isset($_POST['enrol_strand']) ? $_POST['enrol_strand'] : "")."', '".(isset($_POST['enrol_combo']) ? $_POST['enrol_combo'] : "")."', '".$_POST['enrol_schoolyears']."', '".$_POST['ti_status']."', '-')");	
 	if(!$result1){
 		echo mysql_error();
 	}
@@ -64,7 +64,7 @@ if(isset($_GET['Enroll']) && $_GET['Enroll']=="Yes"){
 	}
 	while($dataPros = dbarray($resultPros)){
 		//echo $dataPros['class_pros_no'];
-		$resultEnroll = dbquery("INSERT INTO grade (grade_no, grade_sy, grade_sem, grade_class_no, grade_stud_no) VALUES ('','".$current_sy."','".$cur_sem."','".$dataPros['class_no']."','".$_POST['enrol_stud_no']."')");
+		$resultEnroll = dbquery("INSERT INTO grade (grade_no, grade_sy, grade_sem, grade_class_no, grade_stud_no) VALUES (0,'".$current_sy."','".$cur_sem."','".$dataPros['class_no']."','".$_POST['enrol_stud_no']."')");
 		if(!$resultEnroll){
 			echo mysql_error();
 		}
