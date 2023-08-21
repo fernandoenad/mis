@@ -4,7 +4,7 @@
 				$resultEnrol = dbquery("SELECT * FROM studenroll WHERE (enrol_sy='".$current_sy."' AND enrol_stud_no='".$_GET['showProfile']."')");
 				$dataEnroll = dbarray($resultEnrol);
 				$resultSectionNamex = dbquery("SELECT * FROM section WHERE section_name='".(isset($dataEnroll['enrol_section']) ?  $dataEnroll['enrol_section'] : "")."'");
-				$dataSectionName = dbarray(isset($resultSectionName) ? $resultSectionName : "");
+				$dataSectionName = dbarray(isset($resultSectionNamex) ? $resultSectionNamex : null);
 				$resultGradeOAll = dbquery("SELECT * FROM grade INNER JOIN class ON grade.grade_class_no=class.class_no INNER JOIN prospectus ON class.class_pros_no=prospectus.pros_no WHERE (grade.grade_stud_no='".$_GET['showProfile']."' and class.class_sy='".$current_sy."') GROUP BY grade_sem ORDER BY grade_sem asc, pros_sort ASC");
 				$countGradeOAll = dbrows($resultGradeOAll);
 				if($countGradeOAll==0){ echo "No current enrollment!";}

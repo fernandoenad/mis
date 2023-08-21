@@ -36,30 +36,30 @@
 			?>
 				<tr>
 					<td><small><small><?php echo $dataEnrollList['enrol_sy'];?>-<?php echo $dataEnrollList['enrol_sy']+1;?></small></small></td>
-					<td><small><?php echo $dataAtt['sch_firstday'];?></small></td>
-					<td><?php echo number_format($dataAtt['sch_m1'],2);?></td>
-					<td><?php echo number_format($dataAtt['sch_m2'],2);?></td>
-					<td><?php echo number_format($dataAtt['sch_m3'],2);?></td>
-					<td><?php echo number_format($dataAtt['sch_m4'],2);?></td>
-					<td><?php echo number_format($dataAtt['sch_m5'],2);?></td>
-					<td><?php echo number_format($dataAtt['sch_m6'],2);?></td>
-					<td><?php echo number_format($dataAtt['sch_m7'],2);?></td>
-					<td><?php echo number_format($dataAtt['sch_m8'],2);?></td>
-					<td><?php echo number_format($dataAtt['sch_m9'],2);?></td>
-					<td><?php echo number_format($dataAtt['sch_m10'],2);?></td>
-					<td><?php echo number_format($dataAtt['sch_m11'],2);?></td>
-					<td><?php echo number_format($dataAtt['sch_m12'],2);?></td>
+					<td><small><?php echo (isset($dataAtt['sch_firstday']) ? $dataAtt['sch_firstday'] : '0000-00-00');?></small></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m1']) ? $dataAtt['sch_m1'] : 0,2);?></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m2']) ? $dataAtt['sch_m2'] : 0,2);?></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m3']) ? $dataAtt['sch_m3'] : 0,2);?></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m4']) ? $dataAtt['sch_m4'] : 0,2);?></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m5']) ? $dataAtt['sch_m5'] : 0,2);?></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m6']) ? $dataAtt['sch_m6'] : 0,2);?></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m7']) ? $dataAtt['sch_m7'] : 0,2);?></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m8']) ? $dataAtt['sch_m8'] : 0,2);?></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m9']) ? $dataAtt['sch_m9'] : 0,2);?></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m10']) ? $dataAtt['sch_m10'] : 0,2);?></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m11']) ? $dataAtt['sch_m11'] : 0,2);?></td>
+					<td><?php echo number_format(isset($dataAtt['sch_m12']) ? $dataAtt['sch_m12'] : 0,2);?></td>
 					<?php
 					$checkPresent = dbquery("SELECT (sch_m1 + sch_m2 + sch_m3 + sch_m4 + sch_m5 + sch_m6 + sch_m7 + sch_m8 + sch_m9 + sch_m10 + sch_m11 + sch_m12) as total FROM school_days WHERE (sch_sy='".$dataEnrollList['enrol_sy']."' AND sch_stud_no='".$_GET['showProfile']."')");
 					$dataPresent = dbarray($checkPresent);
 					?>
-					<td><?php echo number_format($dataPresent['total'],2);?></td>
+					<td><?php echo number_format((isset($dataPresent['total']) ? $dataPresent['total'] : 0),2);?></td>
 					<?php
 					$checkSchoolDays = dbquery("SELECT (sch_m1 + sch_m2 + sch_m3 + sch_m4 + sch_m5 + sch_m6 + sch_m7 + sch_m8 + sch_m9 + sch_m10 + sch_m11 + sch_m12) as total FROM school_days WHERE (sch_sy='".$dataEnrollList['enrol_sy']."' AND sch_stud_no='".$dataEnrollList['enrol_sy']."')");
 					$dataSchoolDays = dbarray($checkSchoolDays);
-					$dataSchDays = ($dataSchoolDays['total']==0?1:number_format($dataSchoolDays['total'],2));
+					$dataSchDays = isset($dataSchoolDays['total']) ? number_format($dataSchoolDays['total'],2) : 0.00;
 					?>
-					<td><?php echo number_format($dataPresent['total']/$dataSchDays*100,2);?>%</td>
+					<td><?php echo (isset($dataPresent['total']) ? number_format($dataPresent['total']/$dataSchDays*100,2) : 0.00);?>%</td>
 					<td>
 						<?php
 						if($_SESSION["user_role"]==0 || $_SESSION["user_role"]==2){}
