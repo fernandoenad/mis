@@ -166,7 +166,7 @@ $dataUser = dbarray($checkUser );
 				
 				
 				<?php
-				$checkTeacher = dbquery("SELECT * FROM users WHERE user_no='".$dataGrade['class_user_name']."'");
+				$checkTeacher = dbquery("SELECT * FROM users WHERE user_no='".(isset($dataGrade['class_user_name']) ? $dataGrade['class_user_name'] : 0)."'");
 				$dataTeacher = dbarray($checkTeacher);
 				$resultGrade = dbquery("SELECT * FROM grade INNER JOIN class ON grade.grade_class_no=class.class_no INNER JOIN prospectus ON class.class_pros_no=prospectus.pros_no WHERE (grade.grade_stud_no='".$_GET['stud_no']."' and pros_title LIKE '%SCI%' and grade.grade_sy='".$_GET['enrol_sy']."') ORDER BY class_timeslots ASC, pros_sort ASC");
 				$dataGrade = dbarray($resultGrade);

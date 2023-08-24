@@ -401,8 +401,13 @@
 										<?php echo $dataClassList['stud_lrn']; ?>
 									</a>
 								</small></td>
-                                <td><small><?php echo strtoupper($dataClassList['stud_lname']); ?>, <?php echo strtoupper($dataClassList['stud_fname']); ?> <?php echo strtoupper($dataClassList['stud_xname']); ?> <?php echo strtoupper($dataClassList['stud_mname']); ?> </small></td>
-                                <?php
+								<td>
+									<small>
+									<a href="#" title="Print Admission Slip" onclick="window.open('studAdmin.php?stud_no=<?php echo $dataClassList['stud_no']; ?>&enrol_sy=<?php echo $current_sy;?>&enrol_sem=<?php echo ($dataClassList['enrol_level'] > 10 ? $current_sem : 12);?>', 'newwindow', 'width=850, height=520'); return false;">
+										<?php echo strtoupper($dataClassList['stud_lname']); ?>, <?php echo strtoupper($dataClassList['stud_fname']); ?> <?php echo strtoupper($dataClassList['stud_xname']); ?> <?php echo strtoupper($dataClassList['stud_mname']); ?> <?php echo strtoupper($dataClassList['stud_xname']); ?> 
+									</a>
+									</small>
+								</td>                                <?php
 									$student_image = "./assets/images/students/".$dataClassList['stud_no'].".jpg";	
 								?>
 								<td><small><?php echo substr($dataClassList['stud_gender'],0,1);?> <?php echo (file_exists($student_image)?"":"<span class=\"glyphicon glyphicon-user\"></span>"); ?> <?php echo ($dataClassList['stud_dialect']=="-" || $dataClassList['stud_dialect']==""?"<span class=\"glyphicon glyphicon-list\"></span>":""); ?></small></td>
@@ -514,7 +519,13 @@
 										<?php echo $dataClassList['stud_lrn']; ?>
 									</a>
 								</small></td>
-                                <td><small><?php echo strtoupper($dataClassList['stud_lname']); ?>, <?php echo strtoupper($dataClassList['stud_fname']); ?> <?php echo strtoupper($dataClassList['stud_xname']); ?> <?php echo strtoupper($dataClassList['stud_mname']); ?> <?php echo strtoupper($dataClassList['stud_xname']); ?> </small></td>
+                                <td>
+									<small>
+									<a href="#" title="Print Admission Slip" onclick="window.open('studAdmin.php?stud_no=<?php echo $dataClassList['stud_no']; ?>&enrol_sy=<?php echo $current_sy;?>&enrol_sem=<?php echo ($dataClassList['enrol_level'] > 10 ? $current_sem : 12);?>', 'newwindow', 'width=850, height=520'); return false;">
+										<?php echo strtoupper($dataClassList['stud_lname']); ?>, <?php echo strtoupper($dataClassList['stud_fname']); ?> <?php echo strtoupper($dataClassList['stud_xname']); ?> <?php echo strtoupper($dataClassList['stud_mname']); ?> <?php echo strtoupper($dataClassList['stud_xname']); ?> 
+									</a>
+									</small>
+								</td>
                                 <?php
 									$student_image = "./assets/images/students/".$dataClassList['stud_no'].".jpg";	
 								?>
